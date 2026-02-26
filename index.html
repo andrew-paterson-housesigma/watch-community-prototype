@@ -6,7 +6,14 @@
     <title>Watch Community with Filters - HouseSigma</title>
     
     <style>
-        :root {
+        /* HouseSigma Design System */
+        /**
+ * HouseSigma Design System - CSS Variables
+ * Version 1.0
+ * Auto-generated from design tokens
+ */
+
+:root {
   /* ========== Colors ========== */
   
   /* Primary */
@@ -105,6 +112,202 @@
   
   --hs-transition: all 0.2s ease;
 }
+
+/* ========== Base Styles ========== */
+
+body {
+  font-family: var(--hs-font-family);
+  color: var(--hs-dark);
+  background: var(--hs-background);
+  font-size: var(--hs-body-lg-size);
+  line-height: var(--hs-body-lg-line);
+  letter-spacing: var(--hs-body-lg-spacing);
+}
+
+/* ========== Typography Classes ========== */
+
+.hs-h1 {
+  font-size: var(--hs-h1-size);
+  line-height: var(--hs-h1-line);
+  font-weight: var(--hs-font-semibold);
+  color: var(--hs-dark);
+}
+
+.hs-h2 {
+  font-size: var(--hs-h2-size);
+  line-height: var(--hs-h2-line);
+  font-weight: var(--hs-font-semibold);
+  color: var(--hs-dark);
+}
+
+.hs-h3 {
+  font-size: var(--hs-h3-size);
+  line-height: var(--hs-h3-line);
+  font-weight: var(--hs-font-semibold);
+  color: var(--hs-dark);
+}
+
+.hs-body-lg {
+  font-size: var(--hs-body-lg-size);
+  line-height: var(--hs-body-lg-line);
+  letter-spacing: var(--hs-body-lg-spacing);
+}
+
+.hs-body-md {
+  font-size: var(--hs-body-md-size);
+  line-height: var(--hs-body-md-line);
+  letter-spacing: var(--hs-body-md-spacing);
+  color: var(--hs-gray);
+}
+
+.hs-body-sm {
+  font-size: var(--hs-body-sm-size);
+  line-height: var(--hs-body-sm-line);
+  letter-spacing: var(--hs-body-sm-spacing);
+}
+
+/* ========== Button Classes ========== */
+
+.hs-btn {
+  padding: 12px 24px;
+  border-radius: var(--hs-radius-md);
+  font-size: var(--hs-button-size);
+  font-weight: var(--hs-font-medium);
+  cursor: pointer;
+  transition: var(--hs-transition);
+  border: none;
+  font-family: var(--hs-font-family);
+}
+
+.hs-btn-primary {
+  background: var(--hs-primary-teal);
+  color: var(--hs-white);
+}
+
+.hs-btn-primary:hover {
+  background: var(--hs-primary-teal-hover);
+  box-shadow: 0 2px 8px rgba(40, 163, 180, 0.3);
+}
+
+.hs-btn-secondary {
+  background: var(--hs-white);
+  color: var(--hs-gray);
+  border: 1px solid var(--hs-light-gray);
+}
+
+.hs-btn-secondary:hover {
+  background: var(--hs-background);
+}
+
+/* ========== Card Classes ========== */
+
+.hs-card {
+  background: var(--hs-white);
+  border-radius: var(--hs-radius-lg);
+  padding: var(--hs-space-2xl);
+  box-shadow: var(--hs-shadow-md);
+}
+
+.hs-card:hover {
+  box-shadow: var(--hs-shadow-lg);
+}
+
+/* ========== Filter Classes ========== */
+
+.hs-filter-button {
+  background: var(--hs-white);
+  border: 1px solid var(--hs-light-gray);
+  border-radius: var(--hs-radius-md);
+  padding: 12px 16px;
+  font-size: var(--hs-body-md-size);
+  color: var(--hs-dark);
+  cursor: pointer;
+  transition: var(--hs-transition);
+}
+
+.hs-filter-button:hover {
+  border-color: var(--hs-primary-teal);
+  box-shadow: 0 2px 4px rgba(40, 163, 180, 0.15);
+}
+
+.hs-filter-button.active {
+  background: var(--hs-primary-teal);
+  color: var(--hs-white);
+  border-color: var(--hs-primary-teal);
+}
+
+/* ========== Input Classes ========== */
+
+.hs-input {
+  background: var(--hs-white);
+  border: 1px solid var(--hs-light-gray);
+  border-radius: var(--hs-radius-md);
+  padding: 12px 16px;
+  font-size: var(--hs-body-md-size);
+  color: var(--hs-dark);
+  font-family: var(--hs-font-family);
+  width: 100%;
+}
+
+.hs-input:focus {
+  outline: none;
+  border-color: var(--hs-primary-teal);
+}
+
+/* ========== Tab Classes ========== */
+
+.hs-tab {
+  padding: 16px 0;
+  color: var(--hs-gray);
+  font-size: var(--hs-body-md-size);
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  transition: var(--hs-transition);
+}
+
+.hs-tab.active {
+  color: var(--hs-primary-teal);
+  border-bottom-color: var(--hs-primary-teal);
+}
+
+/* ========== Badge Classes ========== */
+
+.hs-badge {
+  border-radius: var(--hs-radius-xl);
+  padding: 6px 12px;
+  font-size: var(--hs-body-sm-size);
+  font-weight: var(--hs-font-regular);
+}
+
+.hs-badge-info {
+  background: var(--hs-cyan-light);
+  color: var(--hs-blue);
+}
+
+.hs-badge-success {
+  background: var(--hs-green-light);
+  color: var(--hs-green);
+}
+
+/* ========== Header Classes ========== */
+
+.hs-header {
+  background: var(--hs-primary-teal);
+  color: var(--hs-white);
+  padding: 12px 20px;
+  box-shadow: var(--hs-shadow-sm);
+}
+
+/* ========== Utility Classes ========== */
+
+.hs-container {
+  max-width: var(--hs-container-max);
+  margin: 0 auto;
+  padding: 0 var(--hs-container-padding);
+}
+
+
+        /* Component Styles */
         
         body { margin: 0; padding: 0; }
         
