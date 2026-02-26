@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Community with Filters - HouseSigma</title>
+    
+    <style>
+        body { margin: 0; padding: 0; }
+        
+        /* Header */
+        .header {
+            background: var(--hs-primary-teal);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--hs-shadow-sm);
+        }
+        
+        .header-left { display: flex; gap: 16px; align-items: center; }
+        .logo { font-size: 20px; font-weight: 600; }
+        .region-selector {
+            background: rgba(255,255,255,0.2);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .header-nav { display: flex; gap: 24px; font-size: 14px; }
+        .header-nav a { color: white; text-decoration: none; }
+        
+        /* Tabs */
+        .tabs {
+            background: white;
+            border-bottom: 1px solid var(--hs-light-gray);
+            padding: 0 40px;
+            display: flex;
+            gap: 32px;
+        }
+        
+        .tab {
+            padding: 16px 0;
+            color: var(--hs-gray);
+            border-bottom: 3px solid transparent;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        .tab.active {
+            color: var(--hs-primary-teal);
+            border-bottom-color: var(--hs-primary-teal);
+        }
+        
+        /* Screens */
+        .screen { display: none; }
+        .screen.active { display: block; }
+        
+        /* Screen 1: Community Selection */
+        .community-selection {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .breadcrumb {
+            font-size: 14px;
+            color: var(--hs-gray);
+            margin-bottom: 24px;
+        }
+        
+        .selection-panel {
+            background: white;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: var(--hs-shadow-md);
+            margin-bottom: 24px;
+        }
+        
+        .dropdown-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr) auto;
+            gap: 12px;
+            align-items: end;
+            margin-bottom: 24px;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--hs-dark);
+        }
+        
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--hs-light-gray);
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: var(--hs-font-family);
+            background: white;
+        }
+        
+        .map-preview {
+            background: #e8f4f8;
+            height: 400px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--hs-primary-teal);
+            font-size: 16px;
+        }
+        
+        /* Filter Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-overlay.active { display: flex; }
+        
+        .modal {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--hs-light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h2 {
+            font-size: 20px;
+            margin: 0;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--hs-gray);
+        }
+        
+        .modal-body { padding: 24px; }
+        
+        .filter-section {
+            margin-bottom: 32px;
+        }
+        
+        .filter-section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--hs-dark);
+        }
+        
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        
+        .chip {
+            padding: 8px 16px;
+            border: 1px solid var(--hs-light-gray);
+            border-radius: 6px;
+            background: white;
+            color: var(--hs-dark);
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--hs-transition);
+        }
+        
+        .chip:hover {
+            border-color: var(--hs-primary-teal);
+        }
+        
+        .chip.selected {
+            background: var(--hs-primary-teal);
+            color: white;
+            border-color: var(--hs-primary-teal);
+        }
+        
+        .price-slider {
+            margin: 24px 0;
+        }
+        
+        .slider-track {
+            height: 4px;
+            background: var(--hs-light-gray);
+            border-radius: 2px;
+            position: relative;
+            margin: 16px 0;
+        }
+        
+        .slider-fill {
+            position: absolute;
+            height: 100%;
+            background: var(--hs-primary-teal);
+            border-radius: 2px;
+        }
+        
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--hs-gray);
+        }
+        
+        .modal-footer {
+            padding: 24px;
+            border-top: 1px solid var(--hs-light-gray);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: white;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 2000;
+            border-left: 4px solid var(--hs-primary-teal);
+            min-width: 300px;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        .toast.show {
+            display: flex;
+        }
+        
+        .toast-icon {
+            font-size: 24px;
+        }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        
+        .toast-message {
+            font-size: 13px;
+            color: var(--hs-gray);
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">🏠 HouseSigma</div>
+            <div class="region-selector">BC ▼</div>
+        </div>
+        <div class="header-nav">
+            <a href="#">Map Search</a>
+            <a href="#">Market Trends</a>
+            <a href="#">Watched ▼</a>
+            <a href="#">Juan</a>
+        </div>
+    </div>
+    
+    <!-- Tabs -->
+    <div class="tabs">
+        <a href="#" class="tab">Properties</a>
+        <a href="#" class="tab">Areas</a>
+        <a href="#" class="tab active">Communities</a>
+        <a href="#" class="tab">Recently Viewed</a>
+    </div>
+    
+    <!-- Screen 1: Communities List -->
+    <div class="screen active" id="screen-list">
+        <div class="community-selection">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
+                <h1 class="hs-h1">Watched Communities</h1>
+                <button class="hs-btn hs-btn-primary" onclick="showAddCommunity()">Add Watch Community</button>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+                <!-- Example Community Card -->
+                <div class="hs-card" style="padding: 20px;">
+                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                        <div>
+                            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">Ancaster – Ancaster</div>
+                            <div style="font-size: 14px; color: var(--hs-gray);">Freehold Townhouse</div>
+                        </div>
+                        <div style="color: var(--hs-gray); cursor: pointer;">⋮</div>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+                        <div style="background: var(--hs-light-gray); height: 80px; border-radius: 4px;"></div>
+                        <div style="background: var(--hs-light-gray); height: 80px; border-radius: 4px;"></div>
+                        <div style="background: var(--hs-light-gray); height: 80px; border-radius: 4px;"></div>
+                    </div>
+                    
+                    <div style="font-size: 14px; margin-bottom: 8px;">
+                        Median Price: <span style="color: var(--hs-primary-teal); font-weight: 500;">$720,000</span>
+                        <span style="float: right; color: var(--hs-gray);">2026-01</span>
+                    </div>
+                    
+                    <div style="font-size: 13px; color: var(--hs-gray); margin-bottom: 16px;">
+                        Notify for: <span style="color: var(--hs-primary-teal);">New, Sold, Delisted, Price Change</span>
+                    </div>
+                    
+                    <div style="display: flex; gap: 8px;">
+                        <button class="hs-btn hs-btn-secondary" style="flex: 1; padding: 8px 16px;">View Listings</button>
+                        <button class="hs-btn hs-btn-secondary" style="flex: 1; padding: 8px 16px;">Market Trend</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Screen 2: Community Selection -->
+    <div class="screen" id="screen-1">
+        <div class="community-selection">
+            <div class="breadcrumb">
+                <a href="#" onclick="event.preventDefault(); document.getElementById('screen-1').classList.remove('active'); document.getElementById('screen-list').classList.add('active');" style="color: var(--hs-primary-teal); text-decoration: none;">Watched Communities</a> / Add New
+            </div>
+            
+            <div class="selection-panel">
+                <div class="dropdown-row">
+                    <div class="form-group">
+                        <label>Region</label>
+                        <select>
+                            <option>Metro Vancouver</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>City</label>
+                        <select>
+                            <option>Vancouver</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Community</label>
+                        <select>
+                            <option>Kitsilano</option>
+                        </select>
+                    </div>
+                    <button class="hs-btn hs-btn-primary" onclick="showFilters()">Continue</button>
+                </div>
+                
+                <div class="map-preview">
+                    📍 Kitsilano Community Preview
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: flex-start; margin-top: 16px;">
+                <button class="hs-btn hs-btn-secondary" onclick="document.getElementById('screen-1').classList.remove('active'); document.getElementById('screen-list').classList.add('active');">Back to Communities</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Filter Modal -->
+    <div class="modal-overlay" id="filter-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2>Set filter criteria for Kitsilano</h2>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Notify For -->
+                <div class="filter-section">
+                    <div class="filter-section-title">Notify for</div>
+                    <div class="chip-group">
+                        <div class="chip selected">For Sale</div>
+                        <div class="chip selected">Sold</div>
+                        <div class="chip selected">De-listed</div>
+                        <div class="chip selected">Price Change</div>
+                    </div>
+                </div>
+                
+                <!-- Property Type -->
+                <div class="filter-section">
+                    <div class="filter-section-title">Property Type</div>
+                    <div class="chip-group">
+                        <div class="chip selected">All property types</div>
+                        <div class="chip">Detached</div>
+                        <div class="chip">Semi-Detached</div>
+                        <div class="chip">Freehold Townhouse</div>
+                        <div class="chip">Condo Townhouse</div>
+                        <div class="chip">Condo Apt</div>
+                    </div>
+                </div>
+                
+                <!-- Price Range -->
+                <div class="filter-section">
+                    <div class="filter-section-title">Price Range</div>
+                    <div class="price-slider">
+                        <div class="slider-track">
+                            <div class="slider-fill" style="left: 0%; width: 100%;"></div>
+                        </div>
+                        <div class="slider-labels">
+                            <span>$0</span>
+                            <span>$450K</span>
+                            <span>$850K</span>
+                            <span>$1.8M</span>
+                            <span>$3.8M</span>
+                            <span>Max</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bedrooms -->
+                <div class="filter-section">
+                    <div class="filter-section-title">Bedrooms</div>
+                    <div class="chip-group">
+                        <div class="chip selected">All</div>
+                        <div class="chip">0</div>
+                        <div class="chip">1</div>
+                        <div class="chip">2</div>
+                        <div class="chip">3</div>
+                        <div class="chip">4</div>
+                        <div class="chip">5+</div>
+                    </div>
+                </div>
+                
+                <!-- Bathrooms -->
+                <div class="filter-section">
+                    <div class="filter-section-title">Bathrooms</div>
+                    <div class="chip-group">
+                        <div class="chip selected">All</div>
+                        <div class="chip">1+</div>
+                        <div class="chip">2+</div>
+                        <div class="chip">3+</div>
+                        <div class="chip">4+</div>
+                        <div class="chip">5+</div>
+                    </div>
+                </div>
+                
+                <!-- Description Keywords -->
+                <div class="filter-section">
+                    <div class="filter-section-title">Description contains keywords</div>
+                    <input type="text" class="hs-input" placeholder="Waterfront, Pool, Fireplace...">
+                </div>
+            </div>
+            
+            <div class="modal-footer">
+                <button class="hs-btn hs-btn-secondary" onclick="showSuccess()">Skip Filters</button>
+                <button class="hs-btn hs-btn-primary" onclick="showSuccess()">Save Watch Community</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">✅</div>
+        <div class="toast-content">
+            <div class="toast-title">Watch Community Added</div>
+            <div class="toast-message">Now watching Kitsilano with your filter criteria</div>
+        </div>
+    </div>
+    
+    <script>
+        function showAddCommunity() {
+            document.getElementById('screen-list').classList.remove('active');
+            document.getElementById('screen-1').classList.add('active');
+        }
+        
+        function showFilters() {
+            document.getElementById('screen-1').classList.remove('active');
+            document.getElementById('filter-modal').classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('filter-modal').classList.remove('active');
+            document.getElementById('screen-1').classList.add('active');
+        }
+        
+        function showSuccess() {
+            // Close modal
+            document.getElementById('filter-modal').classList.remove('active');
+            
+            // Return to list
+            document.getElementById('screen-1').classList.remove('active');
+            document.getElementById('screen-list').classList.add('active');
+            
+            // Show toast
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            
+            // Auto-hide after 4 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+        
+        // Make chips toggleable
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.chip').forEach(chip => {
+                chip.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
