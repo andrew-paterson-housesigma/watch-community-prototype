@@ -270,71 +270,59 @@
             background: #f0fffe;
         }
 
-        /* Selection Page */
-        .breadcrumb {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
+        /* Selection Page - Full Width Layout */
+        .selection-page {
+            position: relative;
         }
 
-        .breadcrumb a {
+        .selection-breadcrumb {
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            font-size: 14px;
+            color: #666;
+            z-index: 10;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .selection-breadcrumb a {
             color: #3DBCAC;
             text-decoration: none;
         }
 
-        .selection-panel {
-            background: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 6px;
-            padding: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        .selection-controls {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            display: flex;
+            gap: 10px;
+            z-index: 10;
         }
 
-        .dropdown-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr) auto;
-            gap: 12px;
-            align-items: end;
-            margin-bottom: 20px;
+        .selection-controls .form-group {
+            margin: 0;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: #333;
-        }
-
-        .form-group select {
-            width: 100%;
-            padding: 10px 12px;
+        .selection-controls select {
+            padding: 10px 16px;
             border: 1px solid #e0e0e0;
             border-radius: 5px;
             font-size: 14px;
             background: white;
+            min-width: 160px;
         }
 
-        .map-preview {
+        .map-preview-fullwidth {
             background: #e8f4f8;
-            height: 350px;
-            border-radius: 6px;
+            height: calc(100vh - 140px);
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #3DBCAC;
             font-size: 16px;
-        }
-
-        .btn-secondary {
-            background: white;
-            border: 1px solid #ccc;
-            color: #666;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 14px;
-            cursor: pointer;
-            margin-top: 16px;
         }
 
         /* Filter Modal */
@@ -596,39 +584,37 @@
 
     <!-- Screen 2: Community Selection -->
     <div class="screen" id="screen-1">
-        <div class="container">
-            <div class="breadcrumb">
+        <div class="selection-page">
+            <div class="selection-breadcrumb">
                 <a href="#" onclick="event.preventDefault(); backToList()">Watched Communities</a> / Add New
             </div>
 
-            <div class="selection-panel">
-                <div class="dropdown-row">
-                    <div class="form-group">
-                        <label>Region</label>
-                        <select>
-                            <option>Metro Vancouver</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>City</label>
-                        <select>
-                            <option>Vancouver</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Community</label>
-                        <select>
-                            <option>Kitsilano</option>
-                        </select>
-                    </div>
-                    <button class="btn-primary" onclick="showFilters()">Continue</button>
+            <div class="selection-controls">
+                <div class="form-group">
+                    <select>
+                        <option>Metro Vancouver</option>
+                    </select>
                 </div>
-
-                <div class="map-preview">
-                    📍 Kitsilano Community Preview
+                <div class="form-group">
+                    <select>
+                        <option>Vancouver</option>
+                    </select>
                 </div>
+                <div class="form-group">
+                    <select>
+                        <option>Arbutus</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option>Detached</option>
+                    </select>
+                </div>
+                <button class="btn-primary" onclick="showFilters()">Add Community</button>
+            </div>
 
-                <button class="btn-secondary" onclick="backToList()">Back to Communities</button>
+            <div class="map-preview-fullwidth">
+                📍 Arbutus Community Preview
             </div>
         </div>
     </div>
