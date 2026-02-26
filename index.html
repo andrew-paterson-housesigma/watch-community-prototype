@@ -4,420 +4,337 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Watch Community with Filters - HouseSigma</title>
-    
     <style>
-        /* HouseSigma Design System */
-        /**
- * HouseSigma Design System - CSS Variables
- * Version 1.0
- * Auto-generated from design tokens
- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-:root {
-  /* ========== Colors ========== */
-  
-  /* Primary */
-  --hs-primary-teal: #28a3b4;
-  --hs-primary-teal-hover: #00ACC1;
-  
-  /* Neutrals */
-  --hs-dark: #333333;
-  --hs-gray: #666666;
-  --hs-light-gray: #e0e0e0;
-  --hs-background: #f5f5f5;
-  --hs-white: #ffffff;
-  
-  /* Semantic */
-  --hs-success: #4caf50;
-  --hs-error: #f44336;
-  --hs-warning: #ff9800;
-  --hs-info: #2196f3;
-  
-  /* Accents */
-  --hs-blue: #0960ff;
-  --hs-green: #4cae20;
-  --hs-cyan-light: #e5f6f8;
-  --hs-green-light: #f0f9ec;
-  
-  /* ========== Typography ========== */
-  
-  --hs-font-family: Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-  
-  /* Font Weights */
-  --hs-font-regular: 400;
-  --hs-font-medium: 500;
-  --hs-font-semibold: 600;
-  
-  /* Font Sizes */
-  --hs-h1-size: 28px;
-  --hs-h1-line: 36px;
-  
-  --hs-h2-size: 24px;
-  --hs-h2-line: 32px;
-  
-  --hs-h3-size: 20px;
-  --hs-h3-line: 28px;
-  
-  --hs-h4-size: 18px;
-  --hs-h4-line: 24px;
-  
-  --hs-body-lg-size: 16px;
-  --hs-body-lg-line: 24px;
-  --hs-body-lg-spacing: 0.15px;
-  
-  --hs-body-md-size: 14px;
-  --hs-body-md-line: 20px;
-  --hs-body-md-spacing: 0.25px;
-  
-  --hs-body-sm-size: 12px;
-  --hs-body-sm-line: 16px;
-  --hs-body-sm-spacing: 0.4px;
-  
-  --hs-button-size: 14px;
-  --hs-button-line: 20px;
-  
-  /* ========== Spacing ========== */
-  
-  --hs-space-xs: 4px;
-  --hs-space-sm: 8px;
-  --hs-space-md: 12px;
-  --hs-space-lg: 16px;
-  --hs-space-xl: 20px;
-  --hs-space-2xl: 24px;
-  --hs-space-3xl: 32px;
-  --hs-space-4xl: 40px;
-  --hs-space-5xl: 48px;
-  --hs-space-6xl: 64px;
-  --hs-space-7xl: 80px;
-  
-  /* ========== Layout ========== */
-  
-  --hs-container-max: 1200px;
-  --hs-container-padding: 20px;
-  
-  /* ========== Border Radius ========== */
-  
-  --hs-radius-sm: 4px;
-  --hs-radius-md: 6px;
-  --hs-radius-lg: 8px;
-  --hs-radius-xl: 16px;
-  
-  /* ========== Shadows ========== */
-  
-  --hs-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --hs-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
-  --hs-shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.12);
-  
-  /* ========== Transitions ========== */
-  
-  --hs-transition: all 0.2s ease;
-}
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', 'Arial', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
 
-/* ========== Base Styles ========== */
-
-body {
-  font-family: var(--hs-font-family);
-  color: var(--hs-dark);
-  background: var(--hs-background);
-  font-size: var(--hs-body-lg-size);
-  line-height: var(--hs-body-lg-line);
-  letter-spacing: var(--hs-body-lg-spacing);
-}
-
-/* ========== Typography Classes ========== */
-
-.hs-h1 {
-  font-size: var(--hs-h1-size);
-  line-height: var(--hs-h1-line);
-  font-weight: var(--hs-font-semibold);
-  color: var(--hs-dark);
-}
-
-.hs-h2 {
-  font-size: var(--hs-h2-size);
-  line-height: var(--hs-h2-line);
-  font-weight: var(--hs-font-semibold);
-  color: var(--hs-dark);
-}
-
-.hs-h3 {
-  font-size: var(--hs-h3-size);
-  line-height: var(--hs-h3-line);
-  font-weight: var(--hs-font-semibold);
-  color: var(--hs-dark);
-}
-
-.hs-body-lg {
-  font-size: var(--hs-body-lg-size);
-  line-height: var(--hs-body-lg-line);
-  letter-spacing: var(--hs-body-lg-spacing);
-}
-
-.hs-body-md {
-  font-size: var(--hs-body-md-size);
-  line-height: var(--hs-body-md-line);
-  letter-spacing: var(--hs-body-md-spacing);
-  color: var(--hs-gray);
-}
-
-.hs-body-sm {
-  font-size: var(--hs-body-sm-size);
-  line-height: var(--hs-body-sm-line);
-  letter-spacing: var(--hs-body-sm-spacing);
-}
-
-/* ========== Button Classes ========== */
-
-.hs-btn {
-  padding: 12px 24px;
-  border-radius: var(--hs-radius-md);
-  font-size: var(--hs-button-size);
-  font-weight: var(--hs-font-medium);
-  cursor: pointer;
-  transition: var(--hs-transition);
-  border: none;
-  font-family: var(--hs-font-family);
-}
-
-.hs-btn-primary {
-  background: var(--hs-primary-teal);
-  color: var(--hs-white);
-}
-
-.hs-btn-primary:hover {
-  background: var(--hs-primary-teal-hover);
-  box-shadow: 0 2px 8px rgba(40, 163, 180, 0.3);
-}
-
-.hs-btn-secondary {
-  background: var(--hs-white);
-  color: var(--hs-gray);
-  border: 1px solid var(--hs-light-gray);
-}
-
-.hs-btn-secondary:hover {
-  background: var(--hs-background);
-}
-
-/* ========== Card Classes ========== */
-
-.hs-card {
-  background: var(--hs-white);
-  border-radius: var(--hs-radius-lg);
-  padding: var(--hs-space-2xl);
-  box-shadow: var(--hs-shadow-md);
-}
-
-.hs-card:hover {
-  box-shadow: var(--hs-shadow-lg);
-}
-
-/* ========== Filter Classes ========== */
-
-.hs-filter-button {
-  background: var(--hs-white);
-  border: 1px solid var(--hs-light-gray);
-  border-radius: var(--hs-radius-md);
-  padding: 12px 16px;
-  font-size: var(--hs-body-md-size);
-  color: var(--hs-dark);
-  cursor: pointer;
-  transition: var(--hs-transition);
-}
-
-.hs-filter-button:hover {
-  border-color: var(--hs-primary-teal);
-  box-shadow: 0 2px 4px rgba(40, 163, 180, 0.15);
-}
-
-.hs-filter-button.active {
-  background: var(--hs-primary-teal);
-  color: var(--hs-white);
-  border-color: var(--hs-primary-teal);
-}
-
-/* ========== Input Classes ========== */
-
-.hs-input {
-  background: var(--hs-white);
-  border: 1px solid var(--hs-light-gray);
-  border-radius: var(--hs-radius-md);
-  padding: 12px 16px;
-  font-size: var(--hs-body-md-size);
-  color: var(--hs-dark);
-  font-family: var(--hs-font-family);
-  width: 100%;
-}
-
-.hs-input:focus {
-  outline: none;
-  border-color: var(--hs-primary-teal);
-}
-
-/* ========== Tab Classes ========== */
-
-.hs-tab {
-  padding: 16px 0;
-  color: var(--hs-gray);
-  font-size: var(--hs-body-md-size);
-  border-bottom: 3px solid transparent;
-  cursor: pointer;
-  transition: var(--hs-transition);
-}
-
-.hs-tab.active {
-  color: var(--hs-primary-teal);
-  border-bottom-color: var(--hs-primary-teal);
-}
-
-/* ========== Badge Classes ========== */
-
-.hs-badge {
-  border-radius: var(--hs-radius-xl);
-  padding: 6px 12px;
-  font-size: var(--hs-body-sm-size);
-  font-weight: var(--hs-font-regular);
-}
-
-.hs-badge-info {
-  background: var(--hs-cyan-light);
-  color: var(--hs-blue);
-}
-
-.hs-badge-success {
-  background: var(--hs-green-light);
-  color: var(--hs-green);
-}
-
-/* ========== Header Classes ========== */
-
-.hs-header {
-  background: var(--hs-primary-teal);
-  color: var(--hs-white);
-  padding: 12px 20px;
-  box-shadow: var(--hs-shadow-sm);
-}
-
-/* ========== Utility Classes ========== */
-
-.hs-container {
-  max-width: var(--hs-container-max);
-  margin: 0 auto;
-  padding: 0 var(--hs-container-padding);
-}
-
-
-        /* Component Styles */
-        
-        body { margin: 0; padding: 0; }
-        
-        /* Header */
+        /* Header - Exact HouseSigma styling */
         .header {
-            background: var(--hs-primary-teal);
+            background: #3BB8A8;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            box-shadow: var(--hs-shadow-sm);
+            gap: 16px;
+            height: 52px;
         }
-        
-        .header-left { display: flex; gap: 16px; align-items: center; }
-        .logo { font-size: 20px; font-weight: 600; }
-        .region-selector {
-            background: rgba(255,255,255,0.2);
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-size: 14px;
-        }
-        
-        .header-nav { display: flex; gap: 24px; font-size: 14px; }
-        .header-nav a { color: white; text-decoration: none; }
-        
-        /* Tabs */
-        .tabs {
-            background: white;
-            border-bottom: 1px solid var(--hs-light-gray);
-            padding: 0 40px;
+
+        .logo {
+            font-size: 19px;
+            font-weight: 700;
             display: flex;
-            gap: 32px;
+            align-items: center;
+            gap: 6px;
         }
-        
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3BB8A8;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .region-badge {
+            background: #2FA99A;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 380px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 8px 12px 8px 36px;
+            border-radius: 4px;
+            border: none;
+            font-size: 14px;
+            background: white;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            margin-left: auto;
+            font-size: 14px;
+            font-weight: 400;
+        }
+
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Tabs - Light background with pill-style active */
+        .tabs {
+            background: #fafafa;
+            padding: 12px 40px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            border-bottom: 1px solid #e5e5e5;
+        }
+
         .tab {
-            padding: 16px 0;
-            color: var(--hs-gray);
-            border-bottom: 3px solid transparent;
+            padding: 8px 16px;
+            color: #3BB8A8;
             text-decoration: none;
             font-size: 14px;
+            border-radius: 5px;
+            font-weight: 400;
         }
-        
+
         .tab.active {
-            color: var(--hs-primary-teal);
-            border-bottom-color: var(--hs-primary-teal);
+            background: #3BB8A8;
+            color: white;
+            font-weight: 500;
         }
-        
+
+        .notification-bell {
+            margin-left: auto;
+            border: 1px solid #ccc;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #666;
+            background: white;
+        }
+
         /* Screens */
         .screen { display: none; }
         .screen.active { display: block; }
-        
-        /* Screen 1: Community Selection */
-        .community-selection {
+
+        /* Container */
+        .container {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 20px auto;
             padding: 0 20px;
         }
-        
+
+        /* Watched Communities List */
+        .communities-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .communities-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .btn-primary {
+            background: #3BB8A8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #2FA99A;
+        }
+
+        /* Community Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .community-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 18px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .card-subtitle {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .three-dot-menu {
+            background: #3BB8A8;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .thumbnails {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .thumbnail {
+            background: #e0e0e0;
+            height: 85px;
+            border-radius: 4px;
+        }
+
+        .card-price {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .price-value {
+            color: #3BB8A8;
+            font-weight: 600;
+        }
+
+        .price-date {
+            color: #777;
+        }
+
+        .card-notify {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 14px;
+        }
+
+        .notify-links {
+            color: #3BB8A8;
+        }
+
+        .card-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-outline {
+            flex: 1;
+            background: white;
+            border: 1px solid #3BB8A8;
+            color: #3BB8A8;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .btn-outline:hover {
+            background: #f0fffe;
+        }
+
+        /* Selection Page */
         .breadcrumb {
             font-size: 14px;
-            color: var(--hs-gray);
-            margin-bottom: 24px;
+            color: #666;
+            margin-bottom: 20px;
         }
-        
+
+        .breadcrumb a {
+            color: #3BB8A8;
+            text-decoration: none;
+        }
+
         .selection-panel {
             background: white;
-            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
             padding: 24px;
-            box-shadow: var(--hs-shadow-md);
-            margin-bottom: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
         }
-        
+
         .dropdown-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr) auto;
             gap: 12px;
             align-items: end;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
-        
+
         .form-group label {
             display: block;
             font-size: 14px;
             font-weight: 500;
-            margin-bottom: 8px;
-            color: var(--hs-dark);
+            margin-bottom: 6px;
+            color: #333;
         }
-        
+
         .form-group select {
             width: 100%;
-            padding: 12px 16px;
-            border: 1px solid var(--hs-light-gray);
-            border-radius: 6px;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
             font-size: 14px;
-            font-family: var(--hs-font-family);
             background: white;
         }
-        
+
         .map-preview {
             background: #e8f4f8;
-            height: 400px;
-            border-radius: 8px;
+            height: 350px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--hs-primary-teal);
+            color: #3BB8A8;
             font-size: 16px;
         }
-        
+
+        .btn-secondary {
+            background: white;
+            border: 1px solid #ccc;
+            color: #666;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 16px;
+        }
+
         /* Filter Modal */
         .modal-overlay {
             display: none;
@@ -431,9 +348,9 @@ body {
             align-items: center;
             justify-content: center;
         }
-        
+
         .modal-overlay.active { display: flex; }
-        
+
         .modal {
             background: white;
             border-radius: 8px;
@@ -443,143 +360,150 @@ body {
             overflow-y: auto;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
-        
+
         .modal-header {
-            padding: 24px;
-            border-bottom: 1px solid var(--hs-light-gray);
+            padding: 20px 24px;
+            border-bottom: 1px solid #e0e0e0;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .modal-header h2 {
             font-size: 20px;
-            margin: 0;
+            font-weight: 600;
+            color: #333;
         }
-        
+
         .modal-close {
             background: none;
             border: none;
-            font-size: 24px;
+            font-size: 28px;
+            color: #999;
             cursor: pointer;
-            color: var(--hs-gray);
+            line-height: 1;
         }
-        
+
         .modal-body { padding: 24px; }
-        
+
         .filter-section {
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
-        
+
         .filter-section-title {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            margin-bottom: 16px;
-            color: var(--hs-dark);
+            margin-bottom: 12px;
+            color: #333;
         }
-        
+
         .chip-group {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
-        
+
         .chip {
-            padding: 8px 16px;
-            border: 1px solid var(--hs-light-gray);
-            border-radius: 6px;
+            padding: 8px 14px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
             background: white;
-            color: var(--hs-dark);
-            font-size: 14px;
+            color: #333;
+            font-size: 13px;
             cursor: pointer;
-            transition: var(--hs-transition);
         }
-        
+
         .chip:hover {
-            border-color: var(--hs-primary-teal);
+            border-color: #3BB8A8;
         }
-        
+
         .chip.selected {
-            background: var(--hs-primary-teal);
+            background: #3BB8A8;
             color: white;
-            border-color: var(--hs-primary-teal);
+            border-color: #3BB8A8;
         }
-        
+
         .price-slider {
-            margin: 24px 0;
+            margin: 20px 0;
         }
-        
+
         .slider-track {
             height: 4px;
-            background: var(--hs-light-gray);
+            background: #e0e0e0;
             border-radius: 2px;
             position: relative;
-            margin: 16px 0;
+            margin: 12px 0;
         }
-        
+
         .slider-fill {
             position: absolute;
             height: 100%;
-            background: var(--hs-primary-teal);
+            background: #3BB8A8;
             border-radius: 2px;
+            width: 100%;
         }
-        
+
         .slider-labels {
             display: flex;
             justify-content: space-between;
             font-size: 12px;
-            color: var(--hs-gray);
+            color: #777;
         }
-        
+
+        input.text-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        input.text-input:focus {
+            outline: none;
+            border-color: #3BB8A8;
+        }
+
         .modal-footer {
-            padding: 24px;
-            border-top: 1px solid var(--hs-light-gray);
+            padding: 20px 24px;
+            border-top: 1px solid #e0e0e0;
             display: flex;
             justify-content: flex-end;
             gap: 12px;
         }
-        
-        /* Toast Notification */
+
+        /* Toast */
         .toast {
             position: fixed;
             top: 80px;
             right: 20px;
             background: white;
             padding: 16px 20px;
-            border-radius: 8px;
+            border-radius: 6px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.15);
             display: none;
             align-items: center;
             gap: 12px;
             z-index: 2000;
-            border-left: 4px solid var(--hs-primary-teal);
+            border-left: 4px solid #3BB8A8;
             min-width: 300px;
             animation: slideIn 0.3s ease-out;
         }
-        
-        .toast.show {
-            display: flex;
-        }
-        
-        .toast-icon {
-            font-size: 24px;
-        }
-        
-        .toast-content {
-            flex: 1;
-        }
-        
+
+        .toast.show { display: flex; }
+
+        .toast-icon { font-size: 24px; }
+
         .toast-title {
             font-weight: 600;
             font-size: 14px;
             margin-bottom: 4px;
         }
-        
+
         .toast-message {
             font-size: 13px;
-            color: var(--hs-gray);
+            color: #666;
         }
-        
+
         @keyframes slideIn {
             from {
                 transform: translateX(400px);
@@ -595,76 +519,86 @@ body {
 <body>
     <!-- Header -->
     <div class="header">
-        <div class="header-left">
-            <div class="logo">🏠 HouseSigma</div>
-            <div class="region-selector">BC ▼</div>
+        <div class="logo">
+            <div class="logo-icon">⌂</div>
+            HouseSigma
+        </div>
+        <div class="region-badge">BC ▼</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Address, Street Name or Listing#">
         </div>
         <div class="header-nav">
             <a href="#">Map Search</a>
             <a href="#">Market Trends</a>
+            <a href="#">Home Valuation</a>
+            <a href="#">Agents</a>
+            <a href="#">Tools ▼</a>
             <a href="#">Watched ▼</a>
-            <a href="#">Juan</a>
+            <a href="#">Andrew Paterson</a>
         </div>
     </div>
-    
+
     <!-- Tabs -->
     <div class="tabs">
         <a href="#" class="tab">Properties</a>
+        <a href="#" class="tab">Notes</a>
+        <a href="#" class="tab">Toured</a>
         <a href="#" class="tab">Areas</a>
         <a href="#" class="tab active">Communities</a>
         <a href="#" class="tab">Recently Viewed</a>
+        <div class="notification-bell">🔔 Notification</div>
     </div>
-    
+
     <!-- Screen 1: Communities List -->
     <div class="screen active" id="screen-list">
-        <div class="community-selection">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px;">
-                <h1 class="hs-h1">Watched Communities</h1>
-                <button class="hs-btn hs-btn-primary" onclick="showAddCommunity()">Add Watch Community</button>
+        <div class="container">
+            <div class="communities-header">
+                <h1>Watched Communities</h1>
+                <button class="btn-primary" onclick="showAddCommunity()">Add Watch Community</button>
             </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+
+            <div class="cards-grid">
                 <!-- Example Community Card -->
-                <div class="hs-card" style="padding: 20px;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                <div class="community-card">
+                    <div class="card-header">
                         <div>
-                            <div style="font-weight: 600; font-size: 16px; margin-bottom: 4px;">Ancaster – Ancaster</div>
-                            <div style="font-size: 14px; color: var(--hs-gray);">Freehold Townhouse</div>
+                            <div class="card-title">Ancaster – Ancaster</div>
+                            <div class="card-subtitle">Freehold Townhouse</div>
                         </div>
-                        <div style="color: var(--hs-gray); cursor: pointer;">⋮</div>
+                        <div class="three-dot-menu">⋮</div>
                     </div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
-                        <div style="background: var(--hs-light-gray); height: 80px; border-radius: 4px;"></div>
-                        <div style="background: var(--hs-light-gray); height: 80px; border-radius: 4px;"></div>
-                        <div style="background: var(--hs-light-gray); height: 80px; border-radius: 4px;"></div>
+
+                    <div class="thumbnails">
+                        <div class="thumbnail"></div>
+                        <div class="thumbnail"></div>
+                        <div class="thumbnail"></div>
                     </div>
-                    
-                    <div style="font-size: 14px; margin-bottom: 8px;">
-                        Median Price: <span style="color: var(--hs-primary-teal); font-weight: 500;">$720,000</span>
-                        <span style="float: right; color: var(--hs-gray);">2026-01</span>
+
+                    <div class="card-price">
+                        <div>Median Price: <span class="price-value">$720,000</span></div>
+                        <div class="price-date">2026-01</div>
                     </div>
-                    
-                    <div style="font-size: 13px; color: var(--hs-gray); margin-bottom: 16px;">
-                        Notify for: <span style="color: var(--hs-primary-teal);">New, Sold, Delisted, Price Change</span>
+
+                    <div class="card-notify">
+                        Notify for: <span class="notify-links">New, Sold, Delisted, Price Change</span>
                     </div>
-                    
-                    <div style="display: flex; gap: 8px;">
-                        <button class="hs-btn hs-btn-secondary" style="flex: 1; padding: 8px 16px;">View Listings</button>
-                        <button class="hs-btn hs-btn-secondary" style="flex: 1; padding: 8px 16px;">Market Trend</button>
+
+                    <div class="card-buttons">
+                        <button class="btn-outline">View Listings</button>
+                        <button class="btn-outline">Market Trend</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <!-- Screen 2: Community Selection -->
     <div class="screen" id="screen-1">
-        <div class="community-selection">
+        <div class="container">
             <div class="breadcrumb">
-                <a href="#" onclick="event.preventDefault(); document.getElementById('screen-1').classList.remove('active'); document.getElementById('screen-list').classList.add('active');" style="color: var(--hs-primary-teal); text-decoration: none;">Watched Communities</a> / Add New
+                <a href="#" onclick="event.preventDefault(); backToList()">Watched Communities</a> / Add New
             </div>
-            
+
             <div class="selection-panel">
                 <div class="dropdown-row">
                     <div class="form-group">
@@ -685,20 +619,18 @@ body {
                             <option>Kitsilano</option>
                         </select>
                     </div>
-                    <button class="hs-btn hs-btn-primary" onclick="showFilters()">Continue</button>
+                    <button class="btn-primary" onclick="showFilters()">Continue</button>
                 </div>
-                
+
                 <div class="map-preview">
                     📍 Kitsilano Community Preview
                 </div>
-            </div>
-            
-            <div style="display: flex; justify-content: flex-start; margin-top: 16px;">
-                <button class="hs-btn hs-btn-secondary" onclick="document.getElementById('screen-1').classList.remove('active'); document.getElementById('screen-list').classList.add('active');">Back to Communities</button>
+
+                <button class="btn-secondary" onclick="backToList()">Back to Communities</button>
             </div>
         </div>
     </div>
-    
+
     <!-- Filter Modal -->
     <div class="modal-overlay" id="filter-modal">
         <div class="modal">
@@ -706,7 +638,7 @@ body {
                 <h2>Set filter criteria for Kitsilano</h2>
                 <button class="modal-close" onclick="closeModal()">×</button>
             </div>
-            
+
             <div class="modal-body">
                 <!-- Notify For -->
                 <div class="filter-section">
@@ -718,7 +650,7 @@ body {
                         <div class="chip selected">Price Change</div>
                     </div>
                 </div>
-                
+
                 <!-- Property Type -->
                 <div class="filter-section">
                     <div class="filter-section-title">Property Type</div>
@@ -731,13 +663,13 @@ body {
                         <div class="chip">Condo Apt</div>
                     </div>
                 </div>
-                
+
                 <!-- Price Range -->
                 <div class="filter-section">
                     <div class="filter-section-title">Price Range</div>
                     <div class="price-slider">
                         <div class="slider-track">
-                            <div class="slider-fill" style="left: 0%; width: 100%;"></div>
+                            <div class="slider-fill"></div>
                         </div>
                         <div class="slider-labels">
                             <span>$0</span>
@@ -749,7 +681,7 @@ body {
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Bedrooms -->
                 <div class="filter-section">
                     <div class="filter-section-title">Bedrooms</div>
@@ -763,7 +695,7 @@ body {
                         <div class="chip">5+</div>
                     </div>
                 </div>
-                
+
                 <!-- Bathrooms -->
                 <div class="filter-section">
                     <div class="filter-section-title">Bathrooms</div>
@@ -776,64 +708,64 @@ body {
                         <div class="chip">5+</div>
                     </div>
                 </div>
-                
-                <!-- Description Keywords -->
+
+                <!-- Keywords -->
                 <div class="filter-section">
                     <div class="filter-section-title">Description contains keywords</div>
-                    <input type="text" class="hs-input" placeholder="Waterfront, Pool, Fireplace...">
+                    <input type="text" class="text-input" placeholder="Waterfront, Pool, Fireplace...">
                 </div>
             </div>
-            
+
             <div class="modal-footer">
-                <button class="hs-btn hs-btn-secondary" onclick="showSuccess()">Skip Filters</button>
-                <button class="hs-btn hs-btn-primary" onclick="showSuccess()">Save Watch Community</button>
+                <button class="btn-secondary" onclick="showSuccess()">Skip Filters</button>
+                <button class="btn-primary" onclick="showSuccess()">Save Watch Community</button>
             </div>
         </div>
     </div>
-    
-    <!-- Toast Notification -->
+
+    <!-- Toast -->
     <div class="toast" id="toast">
         <div class="toast-icon">✅</div>
-        <div class="toast-content">
+        <div>
             <div class="toast-title">Watch Community Added</div>
             <div class="toast-message">Now watching Kitsilano with your filter criteria</div>
         </div>
     </div>
-    
+
     <script>
         function showAddCommunity() {
             document.getElementById('screen-list').classList.remove('active');
             document.getElementById('screen-1').classList.add('active');
         }
-        
+
         function showFilters() {
             document.getElementById('screen-1').classList.remove('active');
             document.getElementById('filter-modal').classList.add('active');
         }
-        
+
         function closeModal() {
             document.getElementById('filter-modal').classList.remove('active');
             document.getElementById('screen-1').classList.add('active');
         }
-        
-        function showSuccess() {
-            // Close modal
-            document.getElementById('filter-modal').classList.remove('active');
-            
-            // Return to list
+
+        function backToList() {
             document.getElementById('screen-1').classList.remove('active');
             document.getElementById('screen-list').classList.add('active');
-            
-            // Show toast
+        }
+
+        function showSuccess() {
+            document.getElementById('filter-modal').classList.remove('active');
+            document.getElementById('screen-1').classList.remove('active');
+            document.getElementById('screen-list').classList.add('active');
+
             const toast = document.getElementById('toast');
             toast.classList.add('show');
-            
-            // Auto-hide after 4 seconds
+
             setTimeout(() => {
                 toast.classList.remove('show');
             }, 4000);
         }
-        
+
         // Make chips toggleable
         document.addEventListener('DOMContentLoaded', function() {
             document.querySelectorAll('.chip').forEach(chip => {
